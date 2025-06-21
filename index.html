@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Solo Central V4 - Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
+<style>
+  body {
+    margin: 0;
+    background: #0a0a0a;
+    color: #00c3ff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+  #particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background: #000;
+  }
+  nav.navbar {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #121212cc;
+    backdrop-filter: saturate(180%) blur(8px);
+    border-radius: 14px;
+    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    z-index: 1000;
+  }
+  nav.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 50px;
+  }
+  nav.navbar .nav-links li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    filter: invert(70%) brightness(90%);
+    transition: filter 0.3s ease;
+    position: relative;
+  }
+  nav.navbar .nav-links li a.active,
+  nav.navbar .nav-links li a:hover {
+    filter: invert(45%) sepia(87%) saturate(3500%) hue-rotate(176deg) brightness(105%) contrast(105%);
+  }
+  nav.navbar .nav-links li a[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00c3ff;
+    color: #121212;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+  }
+  nav.navbar .nav-links li a[data-tooltip]::after {
+    opacity: 0;
+    pointer-events: none;
+  }
+  main.container {
+    margin-top: 130px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+  }
+  main.container h1 {
+    font-size: 5rem;
+    font-weight: 900;
+    text-align: center;
+    color: #00c3ff;
+    user-select: none;
+  }
+  .uv-form {
+    width: 90%;
+    max-width: 600px;
+  }
+  .uv-form input {
+    width: 100%;
+    padding: 18px 24px;
+    font-size: 1.2rem;
+    border-radius: 16px;
+    border: none;
+    outline: none;
+    background: #1a1a1a;
+    color: #00c3ff;
+    box-shadow: 0 0 10px #00c3ff60;
+    transition: all 0.25s ease;
+  }
+  .uv-form input:focus {
+    box-shadow: 0 0 18px #00c3ff;
+    transform: scale(1.02);
+  }
+</style>
+</head>
+<body>
+<div id="particles-js"></div>
+
+<nav class="navbar">
+  <ul class="nav-links">
+    <li><a href="index.html" class="active" data-tooltip="Home"><img src="icons/house-solid.svg" alt="Home" /></a></li>
+    <li><a href="games.html" data-tooltip="Games"><img src="icons/gamepad-solid.svg" alt="Games" /></a></li>
+    <li><a href="partners.html" data-tooltip="Partners"><img src="icons/tool.svg" alt="Partners" /></a></li>
+    <li><a href="settings.html" data-tooltip="Settings"><img src="icons/gear-solid.svg" alt="Settings" /></a></li>
+  </ul>
+</nav>
+
+<main class="container">
+  <h1>Solo Central V4</h1>
+  <form id="uv-search-form" class="uv-form">
+    <input type="text" id="uv-search-input" placeholder="Search or enter a URL..." autocomplete="off" />
+  </form>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="uv/uv.bundle.js"></script>
+<script src="uv/uv.config.js"></script>
+<script>
+particlesJS('particles-js', {
+  particles: {
+    number: { value: 168 },
+    color: { value: '#00c3ff' },
+    shape: { type: 'circle' },
+    opacity: { value: 0.9 },
+    size: { value: 4, random: true },
+    line_linked: { enable: false },
+    move: {
+      enable: true,
+      speed: 1.6,
+      direction: 'none',
+      random: true,
+      straight: false,
+      out_mode: 'out',
+      bounce: false
+    }
+  },
+  interactivity: {
+    detect_on: 'canvas',
+    events: {
+      onhover: { enable: true, mode: 'repulse' },
+      onclick: { enable: true, mode: 'push' }
+    },
+    modes: {
+      repulse: { distance: 90 },
+      push: { quantity: 4 }
+    }
+  },
+  retina_detect: true
+});
+
+const form = document.getElementById('uv-search-form');
+const input = document.getElementById('uv-search-input');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  let value = input.value.trim();
+  if (!value) return;
+  try {
+    const url = new URL(value);
+    location.href = __uv$config.prefix + __uv$config.encodeUrl(url.href);
+  } catch {
+    location.href = __uv$config.prefix + __uv$config.encodeUrl('https://www.google.com/search?q=' + encodeURIComponent(value));
+  }
+});
+
+const links = document.querySelectorAll('.nav-links a');
+const current = window.location.pathname.split('/').pop() || 'index.html';
+links.forEach(link => {
+  if (link.getAttribute('href') === current) {
+    links.forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+  }
+});
+</script>
+</body>
+</html>

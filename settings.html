@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Solo Central V4 - Settings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding-top: 60px;
+      background: #0a0a0a;
+      color: #a0b9cc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      top: 0;
+      left: 0;
+    }
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      background: #121212;
+      border-bottom: 2px solid #00c3ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,195,255,0.25);
+      z-index: 1000;
+      user-select: none;
+      gap: 60px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .navbar .logo {
+      position: absolute;
+      left: 24px;
+      font-size: 1.6rem;
+      color: #00c3ff;
+      font-weight: 700;
+      user-select: none;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 48px;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links li a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      cursor: pointer;
+      position: relative;
+      filter: invert(70%) sepia(0%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(85%);
+      transition: filter 0.3s ease, background-color 0.3s ease;
+      text-decoration: none;
+    }
+    .nav-links li a.active,
+    .nav-links li a:hover {
+      filter: invert(45%) sepia(87%) saturate(3500%) hue-rotate(176deg) brightness(105%) contrast(105%);
+      background-color: rgba(0, 195, 255, 0.15);
+    }
+    .nav-icon {
+      width: 28px;
+      height: 28px;
+      pointer-events: none;
+    }
+    .nav-links li a[data-tooltip]:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -32px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #00c3ff;
+      color: #121212;
+      font-weight: 600;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.2s ease;
+    }
+    .nav-links li a[data-tooltip]::after {
+      opacity: 0;
+      pointer-events: none;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 2rem;
+      color: #00c3ff;
+      font-weight: 700;
+      font-size: 2.5rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2rem auto 4rem;
+      padding: 0 20px;
+      text-align: center;
+    }
+    button {
+      background: #00c3ff;
+      border: none;
+      color: #121212;
+      font-weight: 700;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #007bbf;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+ 
+  <nav class="navbar" aria-label="Main Navigation">
+    <ul class="nav-links">
+      <li><a href="index.html" class="active" data-tooltip="Home"><img src="icons/house-solid.svg" alt="Home" /></a></li>
+      <li><a href="games.html" data-tooltip="Games"><img src="icons/gamepad-solid.svg" alt="Games" /></a></li>
+      <li><a href="partners.html" data-tooltip="Partners"><img src="icons/tool.svg" alt="Partners" /></a></li>
+      <li><a href="#" id="settings-link" data-tooltip="Settings"><img src="icons/gear-solid.svg" alt="Settings" /></a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Settings</h1>
+    <p>Change particle colors below:</p>
+    <input type="color" id="particleColor" value="#ffffff" style="width:100px; height:40px; border:none; border-radius:8px; cursor:pointer;"/>
+    <button id="resetParticles">Reset Particles</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const colorInput = document.getElementById('particleColor')
+    const resetBtn = document.getElementById('resetParticles')
+
+    function loadParticleColor() {
+      return localStorage.getItem('particleColor') || '#ffffff'
+    }
+
+    function saveParticleColor(color) {
+      localStorage.setItem('particleColor', color)
+    }
+
+    function updateParticlesColor(color) {
+      window.pJSDom && window.pJSDom[0] && window.pJSDom[0].pJS && window.pJSDom[0].pJS.particles.color.value = color
+      window.pJSDom && window.pJSDom[0] && window.pJSDom[0].pJS && window.pJSDom[0].pJS.fn.particlesRefresh()
+    }
+
+    colorInput.value = loadParticleColor()
+    colorInput.addEventListener('input', e => {
+      const c = e.target.value
+      saveParticleColor(c)
+      updateParticlesColor(c)
+    })
+
+    resetBtn.addEventListener('click', () => {
+      localStorage.removeItem('particleColor')
+      colorInput.value = '#ffffff'
+      updateParticlesColor('#ffffff')
+    })
+
+    document.getElementById('settings-link')?.addEventListener('click', e => e.preventDefault())
+
+    const links = document.querySelectorAll('.nav-links a')
+    const current = window.location.pathname.split('/').pop() || 'settings.html'
+    links.forEach(link => {
+      if(link.getAttribute('href') === current) {
+        links.forEach(l => l.classList.remove('active'))
+        link.classList.add('active')
+      }
+    })
+  </script>
+</body>
+</html>

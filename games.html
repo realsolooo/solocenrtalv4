@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Solo Central V4 - Games</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap');
+
+  body {
+    margin: 0;
+    background: #0a0a0a;
+    color: #00c3ff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  #particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background: #000;
+  }
+
+  nav.navbar {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #121212cc;
+    backdrop-filter: saturate(180%) blur(8px);
+    border-radius: 14px;
+    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    z-index: 1000;
+  }
+  nav.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 50px;
+  }
+  nav.navbar .nav-links li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    filter: invert(70%) sepia(0%) saturate(0%) hue-rotate(180deg) brightness(100%) contrast(85%);
+    transition: filter 0.3s ease;
+    position: relative;
+  }
+  nav.navbar .nav-links li a.active,
+  nav.navbar .nav-links li a:hover {
+    filter: invert(45%) sepia(87%) saturate(3500%) hue-rotate(176deg) brightness(105%) contrast(105%);
+  }
+  nav.navbar .nav-links li a[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00c3ff;
+    color: #121212;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+  }
+  nav.navbar .nav-links li a[data-tooltip]::after {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  main.container {
+    margin-top: 100px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 3rem;
+    user-select: none;
+  }
+
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  .game-grid a {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 8px #000;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block;
+  }
+  .game-grid a:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 24px #00c3ff;
+    z-index: 10;
+  }
+  .game-grid img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    transition: filter 0.3s ease;
+  }
+  .game-grid a:hover img {
+    filter: brightness(1.15);
+  }
+  .game-name {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #00c3ff;
+    font-weight: 700;
+    font-size: 1rem;
+    background: rgba(0,0,0,0.6);
+    padding: 4px 10px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .game-grid a:hover .game-name {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <nav class="navbar" aria-label="Main Navigation">
+    <ul class="nav-links">
+      <li><a href="index.html" data-tooltip="Home"><img src="icons/house-solid.svg" alt="Home" /></a></li>
+      <li><a href="games.html" class="active" data-tooltip="Games"><img src="icons/gamepad-solid.svg" alt="Games" /></a></li>
+      <li><a href="partners.html" data-tooltip="Partners"><img src="icons/tool.svg" alt="Partners" /></a></li>
+      <li><a href="#" id="settings-link" data-tooltip="Settings"><img src="icons/gear-solid.svg" alt="Settings" /></a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <h1>Games</h1>
+    <div class="game-grid">
+      <a href="games/1v1lol/index.html" target="_blank">
+        <img src="games/1v1lol/splash.png" alt="1v1.LoL" />
+        <div class="game-name">1v1.LoL</div>
+      </a>
+      <a href="games/bitlife/index.html" target="_blank">
+        <img src="games/bitlife/splash.png" alt="Bitlife" />
+        <div class="game-name">Bitlife</div>
+      </a>
+      <a href="games/2048/index.html" target="_blank">
+        <img src="games/2048/2048.png" alt="2048" />
+        <div class="game-name">2048</div>
+      </a>
+      <a href="games/a-dance-of-fire-and-ice/index.html" target="_blank">
+        <img src="games/a-dance-of-fire-and-ice/splash.png" alt="A Dance of Fire and Ice" />
+        <div class="game-name">A Dance of Fire and Ice</div>
+      </a>
+      <a href="games/among-us/index.html" target="_blank">
+        <img src="games/among-us/red.png" alt="Among Us" />
+        <div class="game-name">Among Us</div>
+      </a>
+      <a href="games/badparenting/index.html" target="_blank">
+        <img src="games/badparenting/splash.jpg" alt="Bad Parenting" />
+        <div class="game-name">Bad Parenting</div>
+      </a>
+      <a href="games/baldis-basics/index.html" target="_blank">
+        <img src="games/baldis-basics/splash.png" alt="Baldi's Basics" />
+        <div class="game-name">Baldi's Basics</div>
+      </a>
+      <a href="games/basket-random/index.html" target="_blank">
+        <img src="games/basket-random/splash.jpeg" alt="Basket Random" />
+        <div class="game-name">Basket Random</div>
+      </a>
+      <a href="games/bitlife/index.html" target="_blank">
+        <img src="games/bitlife/splash.png" alt="Bitlife" />
+        <div class="game-name">BitLife</div>
+      </a>
+      <a href="games/blockblast/index.html" target="_blank">
+        <img src="games/blockblast/TemplateData/favicon.ico" alt="Block Blast" />
+        <div class="game-name">Block Blast</div>
+      </a>
+      <a href="games/bloonstd/index.html" target="_blank">
+        <img src="games/bloonstd/bloonstd.jpg" alt="Bloons TD" />
+        <div class="game-name">Bloons TD</div>
+      </a>
+      <a href="games/btd5/index.html" target="_blank">
+        <img src="games/btd5/BT5_Deluxe_logo.png" alt="BTD 5" />
+        <div class="game-name">BTD 5</div>
+      </a>
+      <a href="games/buckshot/index.html" target="_blank">
+        <img src="games/buckshot/splash.png" alt="BuckShot" />
+        <div class="game-name">Buckshot Roulette</div>
+      </a>
+      <a href="games/cc3d/index.html" target="_blank">
+        <img src="games/cc3d/splash.png" alt="Crazy Cattle 3D" />
+        <div class="game-name">Crazy Cattle 3D</div>
+      </a>
+      <a href="games/cookie-clicker/index.html" target="_blank">
+        <img src="games/cookie-clicker/cookie1.jpeg" alt="Cookie Clicker" />
+        <div class="game-name">Cookie Clicker</div>
+      </a>
+      <a href="games/csgo-clicker/index.html" target="_blank">
+        <img src="games/csgo-clicker/images/case1.png" alt="CSGO Clicker" />
+        <div class="game-name">CSGO Clicker</div>
+      </a>
+            <a href="games/death-run-3d/index.html" target="_blank">
+        <img src="games/death-run-3d/img/death.png" alt="DR 3D" />
+        <div class="game-name">Death Run 3D</div>
+      </a>
+      <a href="games/drift-boss/index.html" target="_blank">
+        <img src="games/drift-boss/media/scenes/car_taxi.png" alt="Drift Boss" />
+        <div class="game-name">Drift Boss</div>
+      </a>
+      <a href="games/drift-hunters/index.html" target="_blank">
+        <img src="games/drift-hunters/drift-hunters.png" alt="Drift Hunters" />
+        <div class="game-name">Drift Hunters</div>
+      </a>
+      <a href="games/drive-mad/index.html" target="_blank">
+        <img src="games/drive-mad/logo.jpg" alt="Drive Mad" />
+        <div class="game-name">Drive Mad</div>
+      </a>
+      <a href="games/ducklife1/index.html" target="_blank">
+        <img src="games/ducklife1/ducklife1.png" alt="Ducklife 1" />
+        <div class="game-name">Ducklife 1</div>
+      </a>
+      <a href="games/eggycar/index.html" target="_blank">
+        <img src="games/eggycar/icon-256.png" alt="Eggycar" />
+        <div class="game-name">Eggy Car</div>
+      </a>
+      <a href="games/fnaf/index.html" target="_blank">
+        <img src="games/fnaf/assets/00a70bb1caf8629ba3808e1fb2be6178.png" alt="FNAF" />
+        <div class="game-name">FNAF</div>
+      </a>
+      <a href="games/fruitninja/index.html" target="_blank">
+        <img src="games/fruitninja/assets/splash/splash screen.png" alt="Fruit Ninja" />
+        <div class="game-name">Fruit Ninja</div>
+      </a>
+      <a href="games/funmayhem/index.html" target="_blank">
+        <img src="games/funmayhem/icon.png" alt="Fun Mayhem" />
+        <div class="game-name">Fun Mayhem</div>
+      </a>
+      <a href="games/minecraft/index.html" target="_blank">
+        <img src="games/minecraft/splash.png" alt="MineCraft" />
+        <div class="game-name">Minecraft</div>
+      </a>
+      <a href="games/repo/index.html" target="_blank">
+        <img src="games/repo/splash.png" alt="R.E.P.O" />
+        <div class="game-name">R.E.P.O</div>
+      </a>
+    </div>
+  </main>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="script.js"></script>
+<script>
+  document.getElementById('settings-link').addEventListener('click', e => {
+    e.preventDefault();
+    const cloaker = window.open('about:blank', '_blank', 'width=600,height=400,menubar=no,toolbar=no,location=no,status=no');
+    if (!cloaker) return alert('Pop-up blocked. Please allow pop-ups for this site.');
+    cloaker.document.write(`
+      <title>Settings</title>
+      <style>body{background:#121212;color:#00c3ff;font-family:Segoe UI,sans-serif;text-align:center;padding:2rem;}h1{margin-top:2rem;}a{color:#00c3ff;text-decoration:none;font-weight:bold;}</style>
+      <h1>Settings (Cloaked Window)</h1>
+      <p>This is a blank cloaker window for settings.</p>
+      <p><a href="#" onclick="window.close()">Close Window</a></p>
+    `);
+    cloaker.document.close();
+  });
+
+  const links = document.querySelectorAll('.nav-links a');
+  const current = window.location.pathname.split('/').pop() || 'games.html';
+  links.forEach(link => {
+    if(link.getAttribute('href') === current) {
+      links.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    }
+  });
+</script>
+</body>
+</html>

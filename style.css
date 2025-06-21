@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: #0a0a14;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #e0e6f3;
+  cursor: url('https://v4.skin/stuff/icons/cursor.png'), auto;
+  overflow-x: hidden;
+}
+
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 56px;
+  background: rgba(20, 25, 40, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0, 195, 255, 0.25);
+  z-index: 1000;
+  user-select: none;
+  width: max-content;
+  border-radius: 0 0 12px 12px;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #00c3ff;
+  margin-right: 24px;
+  user-select: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #a0b9cc;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links .active {
+  background-color: #007acc;
+  color: #e0e6f3;
+}
+
+.container {
+  max-width: 600px;
+  margin: 120px auto 40px;
+  padding: 0 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #00c3ff;
+  margin-bottom: 20px;
+}
+
+#homeSearch {
+  margin-top: 30px;
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 1.2rem;
+  border: 2px solid #00c3ff;
+  border-radius: 12px;
+  background: #121827;
+  color: #e0e6f3;
+  outline: none;
+  box-shadow: 0 0 15px #00c3ff;
+  transition: border-color 0.3s ease;
+}
+
+#homeSearch::placeholder {
+  color: #7aaedc;
+}
+
+#homeSearch:focus {
+  border-color: #33d4ff;
+  box-shadow: 0 0 25px #33d4ff;
+}
